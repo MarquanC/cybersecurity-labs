@@ -1,45 +1,102 @@
 # Cybersecurity Labs
 
-Hands-on cybersecurity and IT security projects focused on
-identity management, security monitoring, Windows security,
-cloud security, and incident investigation.
+Hands-on cybersecurity, IT security, identity, and security monitoring projects documenting practical technical skills through home labs, investigations, and security-focused configurations.
 
-## About
+## About This Repository
 
-This repository documents hands-on labs and projects I have
-completed while developing practical cybersecurity and IT
-security skills.
+This repository contains hands-on labs and projects completed while developing practical cybersecurity and IT security skills.
 
-Each project includes:
+Each project documents:
 
-- Objective
-- Environment
-- Configuration
-- Security concepts
-- Troubleshooting
-- Investigation findings
-- Screenshots/evidence
-- Skills demonstrated
+* The objective and scenario
+* Lab environment and technologies
+* Configuration and implementation
+* Security concepts applied
+* Troubleshooting performed
+* Investigation findings
+* Screenshots and technical evidence
+* Skills and technologies demonstrated
+
+The goal of this repository is to demonstrate practical experience beyond certifications through documented, hands-on technical work.
 
 ## Projects
 
 ### Active Directory
 
-- Active Directory Home Lab
-- LLMNR Mitigation
-- Account Lockout Policy
+| Project                   | Technologies                                             | Focus                        |
+| ------------------------- | -------------------------------------------------------- | ---------------------------- |
+| Active Directory Home Lab | Windows Server 2022, Active Directory, Group Policy, DNS | Identity & Access Management |
+| LLMNR Mitigation          | Windows Server, Group Policy                             | Network Security             |
+| Account Lockout Policy    | Active Directory, Group Policy, Event Viewer             | Authentication Security      |
 
-### Windows Security Monitoring
+### Windows Security
 
-- Authentication Event Investigation
-- Password Spray Investigation
+| Project                       | Technologies                        | Focus                  |
+| ----------------------------- | ----------------------------------- | ---------------------- |
+| Authentication Monitoring     | Windows Security Logs, Event Viewer | Security Monitoring    |
+| Password Spray Investigation  | Windows Security Logs, Event Viewer | Threat Detection       |
+| Account Lockout Investigation | Event Viewer, Active Directory      | Incident Investigation |
 
 ### Microsoft Entra ID
 
-- Identity & Access Management
-- RBAC & MFA
-- Privileged Access Monitoring
+| Project                      | Technologies                                | Focus             |
+| ---------------------------- | ------------------------------------------- | ----------------- |
+| Identity & Access Management | Microsoft Entra ID, RBAC                    | IAM               |
+| MFA Implementation           | Microsoft Entra ID, Microsoft Authenticator | Identity Security |
+| Privileged Access Monitoring | Entra ID, Audit Logs                        | Privileged Access |
 
 ### SIEM
 
-- Splunk Security Monitoring Lab
+| Project                        | Technologies         | Focus                      |
+| ------------------------------ | -------------------- | -------------------------- |
+| Splunk Security Monitoring Lab | Splunk, Windows Logs | SIEM & Security Monitoring |
+
+## Skills & Technologies
+
+**Identity & Access Management**
+
+* Active Directory
+* Microsoft Entra ID
+* RBAC
+* MFA
+* Least Privilege
+* User and Group Management
+
+**Security Monitoring**
+
+* Windows Security Event Logs
+* Event Viewer
+* Authentication Monitoring
+* Account Lockout Investigation
+* Password Spray Detection
+
+**Systems & Infrastructure**
+
+* Windows Server 2022
+* Group Policy
+* DNS
+* NTFS Permissions
+* Virtualization
+* Windows Administration
+
+**Security Tools**
+
+* Splunk
+* Nmap
+* BloodHound
+* SharpHound
+* Prowler
+
+## Certifications
+
+* CompTIA A+
+* CompTIA Network+
+* CompTIA Security+
+* CompTIA CySA+
+* CompTIA PenTest+
+* CompTIA Project+
+* ITIL Foundation
+
+## Disclaimer
+
+These projects were performed in controlled lab environments for educational and professional development purposes. No unauthorized systems or networks were targeted.
