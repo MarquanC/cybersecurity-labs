@@ -387,7 +387,8 @@ DNS Manager
 Event Viewer
 Registry Editor
 gpresult
-Evidence
+
+## Evidence
 
 Screenshots documenting the lab configuration and verification process are available in the screenshots directory.
 
@@ -404,7 +405,27 @@ Group Policy verification
 LLMNR configuration and endpoint verification
 Windows authentication events
 DNS configuration
-Conclusion
+
+---
+
+## Selected Evidence
+
+### Active Directory Structure
+
+The Active Directory environment was organized into departmental, administrative, and workstation Organizational Units.
+
+![Active Directory Structure](./screenshots/02-active-directory-structure.png)
+
+### Tiered Administrative Model
+
+The lab implemented separate administrative tiers for domain, server, and workstation administration.
+
+![Tier 0 Administration](https://github.com/MarquanC/cybersecurity-labs/blob/main/active-directory/screenshots/03a-tier0-admin.png)
+
+![Tier 1 Administration](https://github.com/MarquanC/cybersecurity-labs/blob/main/active-directory/screenshots/03b-tier1-admin-membership.png)
+
+![Tier 2 Administration](https://github.com/MarquanC/cybersecurity-labs/blob/main/active-directory/screenshots/03c-tier2-admin-membership.png)
+## Conclusion
 
 This lab provided hands-on experience designing, implementing, securing, and validating a Windows Active Directory environment.
 
