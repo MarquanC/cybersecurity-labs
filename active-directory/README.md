@@ -35,12 +35,13 @@ The lab was built to simulate a small business domain environment and demonstrat
 - Verify Group Policy application
 - Monitor Windows authentication events
 - Validate DNS integration with Active Directory
+- Practice security configuration validation and troubleshooting
 
 ---
 
 ## Active Directory Structure
 
-The domain was organized using departmental and administrative Organizational Units.
+The domain was organized using departmental, administrative, and workstation Organizational Units.
 
 ```text
 corp.local
@@ -52,7 +53,8 @@ corp.local
 ├── Tier1
 ├── Tier2
 └── Workstations
-
+```
+Department Organization
 | OU        | Example Account         |
 | --------- | ----------------------- |
 | Employees | Your Rage, Jared Mccain |
@@ -60,17 +62,13 @@ corp.local
 | IT        | John Smith              |
 | Sales     | Alice Doe               |
 
-The departmental OUs were used to organize users according to their simulated business functions.
-
 Tiered Administrative Model
 
 A tiered administrative model was implemented to separate privileged access based on administrative responsibilities.
 
 Tier 0 — Domain Administration
 
-Account:
-
-AdminT0
+Account: AdminT0
 
 Group memberships:
 
@@ -81,9 +79,7 @@ Tier 0 represents the highest level of administrative privilege within the lab a
 
 Tier 1 — Server Administration
 
-Account:
-
-admin_t1
+Account: admin_t1
 
 Group memberships:
 
@@ -94,9 +90,7 @@ Tier 1 separates server administration from domain-level administration.
 
 Tier 2 — Workstation Administration
 
-Account:
-
-admin_t2
+Account: admin_t2
 
 Group memberships:
 
@@ -154,21 +148,23 @@ Disable Control Panel
 Domain Controller GPO Deployment
 
 The following GPO was linked to the Domain Controllers OU:
-
 Security_Auditing
+
 Workstation Local Administrator Management
 
 The Workstation_Local_Admins GPO was configured using Group Policy Preferences.
 
 The policy was configured to:
 
-Action: Update
-Local Group: Administrators
-Member: corp\Workstation_Admins
+| Setting     | Configuration             |
+| ----------- | ------------------------- |
+| Action      | Update                    |
+| Local Group | `Administrators`          |
+| Member      | `corp\Workstation_Admins` |
 
 This configuration provides centralized management of workstation administrative privileges.
 
-The administrative access flow is:
+The administrative access flow was:
 
 admin_t2
     ↓
@@ -179,7 +175,6 @@ Workstation_Local_Admins GPO
 Local Administrators Group
     ↓
 Domain Workstations
-
 This demonstrates centralized endpoint privilege management and supports the principle of least privilege.
 
 LLMNR Security Hardening
@@ -195,11 +190,11 @@ The configuration was independently verified on the Windows 10 workstation.
 The following registry configuration was observed:
 
 HKEY_LOCAL_MACHINE
-\SOFTWARE
-\Policies
-\Microsoft
-\Windows NT
-\DNSClient
+└── SOFTWARE
+    └── Policies
+        └── Microsoft
+            └── Windows NT
+                └── DNSClient
 
 With:
 EnableMulticast = 0
@@ -218,9 +213,9 @@ EnableMulticast = 0
 
 This security control was implemented to reduce the risk associated with legacy multicast name-resolution protocols and credential interception attacks.
 
-A Security_Auditing GPO was configured and linked to the Domain Controllers OU.
+Security Auditing
 
-The policy configured:
+A Security_Auditing GPO was configured and linked to the Domain Controllers OU.
 
 Audit Logon
 Success: Enabled
@@ -281,16 +276,6 @@ Group Policy Applied
     ↓
 gpresult Verification
 
-GPO Created
-    ↓
-GPO Linked to OU
-    ↓
-Windows 10 Domain-Joined
-    ↓
-Group Policy Applied
-    ↓
-gpresult Verification
-
 This demonstrates practical Group Policy deployment and troubleshooting skills.
 
 DNS Configuration
@@ -321,7 +306,7 @@ This finding demonstrates the importance of validating the effective configurati
 
 Lessons Learned
 
-This lab reinforced several important cybersecurity and systems administration concepts:
+This lab reinforced several important cybersecurity and systems administration concepts.
 
 1. Least Privilege
 
@@ -374,7 +359,7 @@ Group Policy deployment
 Endpoint configuration verification
 Security Monitoring
 Windows Event Viewer
-Security Event Logs
+Windows Security Event Logs
 Event ID 4624
 Event ID 4625
 Authentication monitoring
@@ -389,6 +374,50 @@ Registry Editor
 gpresult
 
 ## Evidence
+
+### Active Directory Structure
+
+![Active Directory Structure](./screenshots/02-active-directory-structure.png)
+
+### Tiered Administrative Model
+
+#### Tier 0 — Domain Administration
+
+![Tier 0 Administration](./screenshots/03a-tier0-admin.png)
+
+#### Tier 1 — Server Administration
+
+![Tier 1 Administration](./screenshots/03b-tier1-admin-membership.png)
+
+#### Tier 2 — Workstation Administration
+
+![Tier 2 Administration](./screenshots/03c-tier2-admin-membership.png)
+
+### Workstation Local Administrator Management
+
+![Workstation Local Administrators](./screenshots/07-workstation-local-admins.png)
+
+### Workstation GPO Deployment
+
+![Workstation GPO Deployment](./screenshots/08-workstation-gpo-links.png)
+
+### Group Policy Verification
+
+![Group Policy Verification](./screenshots/12-gpo-verification-gpresult.png)
+
+### LLMNR Endpoint Verification
+
+![LLMNR Endpoint Verification](./screenshots/13-llmnr-verification.png)
+
+### Windows Authentication Monitoring
+
+#### Event ID 4624 — Successful Logon
+
+![Event ID 4624 Successful Logon](./screenshots/14-event-4624-successful-logon.png)
+
+#### Event ID 4625 — Failed Logon
+
+![Event ID 4625 Failed Logon](./screenshots/15-event-4625-failed-logon.png)
 
 Screenshots documenting the lab configuration and verification process are available in the screenshots directory.
 
@@ -405,32 +434,46 @@ Group Policy verification
 LLMNR configuration and endpoint verification
 Windows authentication events
 DNS configuration
-
----
-
-## Selected Evidence
-
-### Active Directory Structure
+Active Directory Structure
 
 The Active Directory environment was organized into departmental, administrative, and workstation Organizational Units.
 
-![Active Directory Structure](https://raw.githubusercontent.com/MarquanC/cybersecurity-labs/main/active-directory/screenshots/02-active-directory-structure.png)
-
-
-### Tiered Administrative Model
+Tiered Administrative Model
 
 The lab implemented separate administrative tiers for domain, server, and workstation administration.
 
-![Tier 0 Administration](https://github.com/MarquanC/cybersecurity-labs/blob/main/active-directory/screenshots/03a-tier0-admin.png)
+Workstation Local Administrator Management
 
-![Tier 1 Administration](https://github.com/MarquanC/cybersecurity-labs/blob/main/active-directory/screenshots/03b-tier1-admin-membership.png)
+The Workstation_Local_Admins GPO was configured to add the corp\Workstation_Admins security group to the local Administrators group on domain workstations.
 
-![Tier 2 Administration](https://github.com/MarquanC/cybersecurity-labs/blob/main/active-directory/screenshots/03c-tier2-admin-membership.png)
-## Conclusion
+Group Policy Deployment
+
+The Workstations OU was configured with security-related Group Policy Objects including LLMNR mitigation, workstation administrative controls, and logon restrictions.
+
+LLMNR Endpoint Verification
+
+The LLMNR security configuration was verified on the Windows 10 workstation with:
+
+EnableMulticast = 0
+
+Group Policy Verification
+
+The gpresult /r command was used to verify that the expected Group Policy Objects were applied to the Windows 10 workstation.
+
+Windows Authentication Monitoring
+
+Windows Security Event Viewer was used to review successful and failed authentication activity.
+
+Successful Logon — Event ID 4624
+
+Failed Logon — Event ID 4625
+
+Conclusion
 
 This lab provided hands-on experience designing, implementing, securing, and validating a Windows Active Directory environment.
 
 The project demonstrates the relationship between:
+
 Identity Management
         ↓
 Administrative Privilege Separation
@@ -446,3 +489,4 @@ Authentication Monitoring
 Security Validation
 
 The lab was built as a practical cybersecurity learning environment and was continuously validated to ensure that documented configurations accurately reflected the implemented environment.
+
