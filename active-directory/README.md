@@ -414,7 +414,8 @@ DNS configuration
 
 The Active Directory environment was organized into departmental, administrative, and workstation Organizational Units.
 
-![Active Directory Structure](./screenshots/02-active-directory-structure.png)
+![Active Directory Structure](https://raw.githubusercontent.com/MarquanC/cybersecurity-labs/main/active-directory/screenshots/02-active-directory-structure.png)
+
 
 ### Tiered Administrative Model
 
