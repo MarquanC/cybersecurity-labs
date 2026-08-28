@@ -59,7 +59,7 @@ Severity Assessment
 Disposition
       ↓
 Documentation
-
+```
 The goal was to avoid treating every security event as malicious and instead evaluate the available evidence before determining an appropriate response.
 
 Investigation 1 — Failed Authentication
