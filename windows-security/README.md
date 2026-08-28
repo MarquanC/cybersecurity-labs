@@ -368,22 +368,4 @@ The project demonstrates practical experience analyzing authentication failures,
 
 All investigations were performed using controlled lab activity and the environment was restored after testing.
 
-
-### After pasting
-
-**Preview it before committing**, just like we did with Entra ID.
-
-You should see the **three actual screenshots** under the Evidence sections.
-
-If they appear correctly, use this commit message:
-
-```text
-Add Active Directory security monitoring lab
-
-Then you'll have three completed portfolio projects:
-
-1. Active Directory Home Lab
-2. Microsoft Entra ID Identity & Security Lab
-3. Active Directory Security Monitoring & Incident Investigation
-
 That's a much stronger portfolio progression because the projects now tell one connected story: identity management → cloud identity → detection & investigation.
