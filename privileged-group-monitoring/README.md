@@ -63,7 +63,39 @@ The purpose was not to perform malicious activity, but to generate realistic Win
 
 # Investigation
 
-## 1. Detecting the Domain Admins Group Modification
+## 1. Reviewing Active Directory Privileged Groups
+
+The lab began by reviewing privileged Active Directory groups and establishing the environment's existing administrative structure.
+
+### Evidence
+
+![AD Privileged Groups](screenshots/01-ad-privileged-groups.png)
+
+---
+
+## 2. Configuring Privileged Group Auditing
+
+Windows security auditing was configured to monitor changes to security-enabled groups. This provides visibility into administrative group membership changes.
+
+### Evidence
+
+![Privileged Group Auditing](screenshots/02-privileged-group-auditing.png)
+
+---
+
+## 3. Simulating a Privileged Group Change
+
+A controlled change was performed to generate security telemetry associated with privileged group membership modification.
+
+This created the Windows Security events used throughout the investigation.
+
+### Evidence
+
+![Privileged Group Change](screenshots/03-privileged-group-change.png)
+
+---
+
+## 4. Detecting the Domain Admins Group Modification
 
 The first important event was **Event ID 4728**.
 
@@ -87,15 +119,15 @@ index=main sourcetype="WinEventLog:Security" EventCode=4728
 
 ### Evidence
 
-![Privileged Group Event](screenshots/04-privileged-group-event-4728.png)
+![Privileged Group Event 4728](screenshots/04-privileged-group-event-4728.png)
 
 ---
 
-## 2. Identifying the Privilege Escalation
+## 5. Identifying the Privilege Escalation
 
 The 4728 event was investigated further to determine which account was granted elevated privileges.
 
-The event showed that:
+The event showed:
 
 ```text
 Account Name: SOC -TestUser
@@ -111,7 +143,7 @@ The account was therefore granted membership in a group with administrative priv
 
 ---
 
-## 3. Investigating the Privilege Change
+## 6. Investigating the Privilege Change
 
 The 4728 event was expanded and reviewed to identify the actor, affected account, and privileged group.
 
@@ -137,7 +169,7 @@ This represents the initial privilege escalation point in the investigation.
 
 ---
 
-## 4. Confirming Domain Admin Membership
+## 7. Confirming Domain Admin Membership
 
 The account's membership was independently verified from the Domain Controller using PowerShell.
 
@@ -154,11 +186,11 @@ This provided independent confirmation that the account's elevated group members
 
 ### Evidence
 
-![SOC Domain Admin Membership](screenshots/07-soc-user-domain-admin-membership.png)
+![SOC User Domain Admin Membership](screenshots/07-soc-user-domain-admin-membership.png)
 
 ---
 
-# 5. Investigating the Privileged Account Logon
+# 8. Investigating the Privileged Account Logon
 
 After confirming the account's elevated group membership, Windows Security logs were searched for successful logon activity associated with the account.
 
@@ -194,7 +226,7 @@ index=main sourcetype="WinEventLog:Security" EventCode=4624 earliest=-2h
 
 ---
 
-# 6. Detecting Special Privileges Assigned to the Account
+# 9. Detecting Special Privileges Assigned to the Account
 
 The most significant logon-related event discovered during the investigation was **Event ID 4672**.
 
@@ -241,11 +273,11 @@ index=main sourcetype="WinEventLog:Security" EventCode=4672 earliest=-2h
 
 ### Evidence
 
-![Special Privileges Assigned](screenshots/08-special-privileges-assigned-4672.png)
+![Special Privileges Assigned - Event 4672](screenshots/08-special-privileges-assigned-4672.png)
 
 ---
 
-# 7. Logon Session Correlation
+# 10. Logon Session Correlation
 
 The investigation attempted to identify additional Security events associated with the privileged logon session using the Logon ID:
 
@@ -279,7 +311,7 @@ SOC -TestUser added to Domain Admins
      │
      │
      ▼
-Domain Admin membership verified
+AD membership verified
      │
      │ Event ID 4624
      ▼
@@ -374,4 +406,3 @@ This lab demonstrated a practical SOC investigation of a simulated Active Direct
 By correlating **Event IDs 4728, 4624, and 4672**, the investigation followed the affected account from a privileged group membership change through authentication and assignment of special Windows privileges.
 
 The lab also demonstrated an important SOC principle: **individual events become more valuable when correlated into an activity timeline rather than analyzed in isolation.**
-
